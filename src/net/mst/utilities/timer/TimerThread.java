@@ -23,11 +23,11 @@ public class TimerThread extends Thread {
 		
 		while(running) {
 			
-			long start = System.currentTimeMillis();
-			
-			task.execute();
-			
 			if(!paused) {
+				
+				long start = System.currentTimeMillis();
+				
+				task.execute();
 				
 				long tempLong = interval;
 				
@@ -59,15 +59,9 @@ public class TimerThread extends Thread {
 		
 		setPaused(true);
 		
-		long start = System.nanoTime();
-		long wait = Milliseconds * 1000000;
-		long end = start + wait;
+		long end = System.nanoTime() + (Milliseconds * 1000000);
 		
-		while(System.nanoTime() < end) {
-			
-			
-			
-		}
+		while(System.nanoTime() < end) {}
 		
 		setPaused(false);
 		
