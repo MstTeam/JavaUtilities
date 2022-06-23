@@ -25,12 +25,6 @@ public abstract class Task implements Runnable {
 		
 	}
 	
-	/*public void setTempInterval(Long Interval, Integer Rotations) {
-		
-		this.timer.setTempInterval(Interval, Rotations);
-		
-	}*/
-	
 	public void setTimer(Timer Timer) {
 		
 		this.timer = Timer;

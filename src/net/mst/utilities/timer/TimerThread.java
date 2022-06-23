@@ -10,10 +10,20 @@ public class TimerThread extends Thread {
 	private long tempInterval = -1;
 	private Task task;
 	
+	private boolean highPrecision = false;
+	
 	public TimerThread(long Interval, Task Task) {
 		
 		this.interval = Interval;
 		this.task = Task;
+		
+	}
+	
+	public TimerThread(long Interval, Task Task, boolean highPrecision) {
+		
+		this.interval = Interval;
+		this.task = Task;
+		this.highPrecision = highPrecision;
 		
 	}
 	
@@ -29,23 +39,21 @@ public class TimerThread extends Thread {
 				
 				task.execute();
 				
-				long tempLong = interval;
-				
 				if(tempIntervalTimes > 0) {
 					
 					tempIntervalTimes = tempIntervalTimes - 1;
 					
 					if(tempInterval > 0) {
 						
-						tempLong = tempInterval;
+						waitTime(tempInterval - (System.currentTimeMillis() - start));
 						
 					}
 					
-				}
-				
-				tempLong = tempLong - (System.currentTimeMillis() - start);
+				}else {
 					
-				waitTime(tempLong);
+					waitTime(interval - (System.currentTimeMillis() - start));
+					
+				}
 				
 			}
 			
@@ -57,13 +65,25 @@ public class TimerThread extends Thread {
 	
 	private void waitTime(long Milliseconds) {
 		
-		setPaused(true);
-		
-		long end = System.nanoTime() + (Milliseconds * 1000000);
-		
-		while(System.nanoTime() < end) {}
-		
-		setPaused(false);
+		if(highPrecision) {
+			
+			setPaused(true);
+			
+			long end = System.nanoTime() + (Milliseconds * 1000000);
+			
+			while(System.nanoTime() < end) {}
+			
+			setPaused(false);
+			
+		}else {
+			
+			try {
+				sleep(Milliseconds);
+			} catch (InterruptedException e) {
+				//
+			}
+			
+		}
 		
 	}
 	
