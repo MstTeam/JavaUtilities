@@ -19,15 +19,11 @@ public class TimerThread extends Thread {
 	
 	public void run() {
 		
-		try {
-			sleep(interval);
-		} catch (InterruptedException e1) {
-			//
-		}
+		waitTime(interval);
 		
 		while(running) {
 			
-			long startMillis = System.currentTimeMillis();
+			long start = System.currentTimeMillis();
 			
 			task.execute();
 			
@@ -47,19 +43,33 @@ public class TimerThread extends Thread {
 					
 				}
 				
-				tempLong = tempLong - (System.currentTimeMillis() - startMillis);
-				
-				try {
-					sleep(tempLong);
-				} catch (InterruptedException e) {
-					//
-				}
+				tempLong = tempLong - (System.currentTimeMillis() - start);
+					
+				waitTime(tempLong);
 				
 			}
 			
 		}
 		
 		interrupt();
+		
+	}
+	
+	private void waitTime(long Milliseconds) {
+		
+		setPaused(true);
+		
+		long start = System.nanoTime();
+		long wait = Milliseconds * 1000000;
+		long end = start + wait;
+		
+		while(System.nanoTime() < end) {
+			
+			
+			
+		}
+		
+		setPaused(false);
 		
 	}
 	
