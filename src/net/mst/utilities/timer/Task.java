@@ -50,3 +50,9 @@ public abstract class Task implements Runnable {
 	}
 	
 }
+
+interface Runnable {
+	
+	public void execute();
+
+}
