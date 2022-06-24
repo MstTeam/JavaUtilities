@@ -1,6 +1,6 @@
 package net.mst.utilities.timer;
 
-public abstract class Task implements Runnable {
+public abstract class Task {
 	
 	private Timer timer;
 	
@@ -10,7 +10,6 @@ public abstract class Task implements Runnable {
 		
 	}
 
-	@Override
 	public abstract void execute();
 	
 	public void cancel() {
@@ -51,8 +50,3 @@ public abstract class Task implements Runnable {
 	
 }
 
-interface Runnable {
-	
-	public void execute();
-
-}
