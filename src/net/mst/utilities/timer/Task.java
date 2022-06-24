@@ -43,4 +43,10 @@ public abstract class Task implements Runnable {
 		
 	}
 	
+	public void setTask(Task Task) {
+		
+		this.timer.setTask(Task);
+		
+	}
+	
 }

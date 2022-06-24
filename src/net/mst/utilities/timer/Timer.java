@@ -17,7 +17,7 @@ public class Timer {
 		
 	}
 	
-	public void schedule(Task Task, long Interval) {
+	public Timer schedule(Task Task, long Interval) {
 		
 		Task.setTimer(this);
 		
@@ -25,9 +25,11 @@ public class Timer {
 		
 		thread.start();
 		
+		return this;
+		
 	}
 	
-	public void schedule(Task Task, long Interval, TimerUnit TimeUnit) {
+	public Timer schedule(Task Task, long Interval, TimerUnit TimeUnit) {
 		
 		Task.setTimer(this);
 		
@@ -35,17 +37,23 @@ public class Timer {
 		
 		thread.start();
 		
+		return this;
+		
 	}
 	
-	public void setInterval(Long Interval) {
+	public Timer setInterval(Long Interval) {
 		
 		thread.setInterval(Interval, -1);
 		
+		return this;
+		
 	}
 	
-	public void setTempInterval(Long Interval, Integer Rotations) {
+	public Timer setTempInterval(Long Interval, Integer Rotations) {
 		
 		thread.setInterval(Interval, Rotations);
+		
+		return this;
 		
 	}
 	
@@ -55,15 +63,27 @@ public class Timer {
 		
 	}
 	
-	public void pause() {
+	public Timer setTask(Task Task) {
 		
-		this.thread.setPaused(true);
+		this.thread.setTask(Task);
+		
+		return this;
 		
 	}
 	
-	public void resume() {
+	public Timer pause() {
+		
+		this.thread.setPaused(true);
+		
+		return this;
+		
+	}
+	
+	public Timer resume() {
 		
 		this.thread.setPaused(false);
+		
+		return this;
 		
 	}
 

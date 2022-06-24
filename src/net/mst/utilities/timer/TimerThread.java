@@ -113,5 +113,11 @@ public class TimerThread extends Thread {
 		this.paused = isPaused;
 		
 	}
+	
+	public void setTask(Task Task) {
+		
+		this.task = Task;
+		
+	}
 
 }
