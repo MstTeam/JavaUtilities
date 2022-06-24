@@ -39,11 +39,7 @@ class DelayedActionThread extends Thread {
 		
 		long end = System.currentTimeMillis() + delay;
 		
-		while(System.currentTimeMillis() < end) {
-			
-			
-			
-		}
+		while(System.currentTimeMillis() < end) {}
 		
 		task.execute();
 		
