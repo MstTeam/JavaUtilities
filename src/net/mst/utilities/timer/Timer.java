@@ -27,7 +27,7 @@ public class Timer {
 		
 	}
 	
-	public void schedule(Task Task, long Interval, TimeUnit TimeUnit) {
+	public void schedule(Task Task, long Interval, TimerUnit TimeUnit) {
 		
 		Task.setTimer(this);
 		

@@ -1,6 +1,6 @@
 package net.mst.utilities.timer;
 
-public enum TimeUnit {
+public enum TimerUnit {
 	
 	SECONDS (1000),
 	MINUTES (60*1000),
@@ -8,9 +8,9 @@ public enum TimeUnit {
 	
 	private long msPer = 0;
 	
-	private TimeUnit(long msPer) {
+	private TimerUnit(long msPer) {
 		
-		
+		this.msPer = msPer;
 		
 	}
 	
