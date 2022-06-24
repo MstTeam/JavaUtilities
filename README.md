@@ -6,5 +6,5 @@ This repository is a collection of new Java Features used in many projects or AP
 > Thread-based / HighPrecisionMode / Variable Interval and TempInterval Settings / Variable Task Setting / Timer Units / DelayedActions
 
 ###### Mathematical
-- **Average (Collection\<Number\>)** [net.mst.utilities.mathematical.average](https://github.com/MstTeam/JavaUtilities/tree/master/src/net/mst/utilities/mathematical/Average.java)
+- **Average** (Collection\<Number\>) [net.mst.utilities.mathematical.average](https://github.com/MstTeam/JavaUtilities/tree/master/src/net/mst/utilities/mathematical/Average.java)
 - **Random** (Start + End or Collection\<T\>) [net.mst.utilities.mathematical.random](https://github.com/MstTeam/JavaUtilities/tree/master/src/net/mst/utilities/mathematical/Random.java)
