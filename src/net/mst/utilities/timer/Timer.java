@@ -1,5 +1,8 @@
 package net.mst.utilities.timer;
 
+/**
+ * 
+ */
 public class Timer {
 	
 	private TimerThread thread;

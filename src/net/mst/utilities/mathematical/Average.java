@@ -3,13 +3,31 @@ package net.mst.utilities.mathematical;
 import java.text.DecimalFormat;
 import java.util.Collection;
 
+/**
+ * Calculates the average of numbers and returns the rounded result as a double
+ */
+
 public class Average {
+	
+	private Average() {}
+	
+	/**
+	 * Returns the average of a collection of <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Number.html">numbers</a> 
+	 * @param Numbers Collection of <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Number.html">numbers</a> 
+	 * @return Average as double
+	 */
 	
 	public static double from(Collection<Number> Numbers) {
 		
 		return getAverage(Numbers);
 		
 	}
+	
+	/**
+	 * Returns the average of a collection of numbers with 
+	 * @param Numbers Collection of Numbers
+	 * @return Average as double
+	 */
 	
 	public static double from(Collection<Number> Numbers, Integer RoundingDigits) {
 		
