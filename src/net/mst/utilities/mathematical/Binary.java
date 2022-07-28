@@ -1,7 +1,7 @@
 package net.mst.utilities.mathematical;
 
 import exceptions.FormatException;
-import net.mst.utilities.strings.StringEditor;
+import net.mst.utilities.strings.Editor;
 
 public class Binary {
 	
@@ -79,7 +79,7 @@ public class Binary {
 			
 		}
 		
-		String summand = StringEditor.edit(Binary.returnBinaryString()).setLength(-length, '0');
+		String summand = Editor.edit(Binary.returnBinaryString()).setLength(-length, '0');
 		
 		String solution = "";
 		String rest = "";

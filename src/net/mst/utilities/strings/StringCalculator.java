@@ -77,7 +77,7 @@ public class StringCalculator {
 			
 			if(RawStrings[pos].matches("[0-9]+")) { 
 				
-				stringArray[pos] = StringEditor.edit(RawStrings[pos]).setLength(- (highest), '0');
+				stringArray[pos] = Editor.edit(RawStrings[pos]).setLength(- (highest), '0');
 				
 			}
 			

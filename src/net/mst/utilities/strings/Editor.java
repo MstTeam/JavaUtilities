@@ -1,18 +1,32 @@
 package net.mst.utilities.strings;
 
-public class StringEditor {
+public class Editor {
 	
 	private String raw = "";
 	
-	public StringEditor(String Raw) {
+	public Editor(String Raw) {
 		
 		this.raw = Raw;
 		
 	}
 	
-	public static StringEditor edit(String Raw) {
+	public static Editor edit(String Raw) {
 		
-		return new StringEditor(Raw);
+		return new Editor(Raw);
+		
+	}
+	
+	public static String connect(Character Connector, String... Strings) {
+		
+		String connectedString = "";
+		
+		for(String string : Strings) {
+			
+			connectedString += string + Connector;
+			
+		}
+		
+		return connectedString;
 		
 	}
 	
@@ -22,34 +36,29 @@ public class StringEditor {
 			
 			for(int i = (Length + raw.length()); i < 0; i++) {
 				
-				this.raw = Filler + this.raw;
+				raw = Filler + raw;
 				
 			}
 			
-			return this.raw;
+		}
+		
+		if(Length <= this.raw.length() && Length >= 0) {
+			
+			return raw.substring(0, Length);
 			
 		}
 		
-		if(raw.length() > Length) {
+		if(Length > raw.length()) {
 			
-			this.raw = raw.substring(0, Length);
-			return this.raw;
-			
-		}
-		
-		if(raw.length() < Length) {
-			
-			for(int i = 0; i < (Length - raw.length()); i++) {
+			for(int i = raw.length(); i < Length; i++) {
 				
-				this.raw += Filler;
+				raw += Filler;
 				
 			}
 			
-			return this.raw;
-			
 		}
 		
-		return this.raw;
+		return raw;
 		
 	}
 	
@@ -86,11 +95,15 @@ public class StringEditor {
 		
 		for(int i = 0; i <= raw.length(); i++) {
 			
-			if(i > raw.length()) {continue;}
+			String insert = insertedStrings[insertedStrings.length - 1];
+			
+			if(count < insertedStrings.length) {
+				insert = insertedStrings[count];
+			}
 
 			String[] tempArray = {raw.substring(0, i), raw.substring(i, raw.length())};
-			raw = String.join("", tempArray[0], insertedStrings[count], tempArray[1]);
-			i += (insertedStrings[count].length());
+			raw = String.join("", tempArray[0], insert, tempArray[1]);
+			i += (insert.length());
 			
 			i += (Interval - 1);
 			
