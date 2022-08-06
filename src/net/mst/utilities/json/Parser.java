@@ -1,21 +1,17 @@
 package net.mst.utilities.json;
 
+
 public class Parser {
 	
 	private String JsonString = null;
 	private JsonObject JsonObject = null;
 	
 	private int currentPos = 0;
-	private String name = "jsonFile";
 	
 	public Parser() {
 		
 	}
-	
-	public Parser(String Name) {
-		this.name = Name;
-	}
-	
+
 	public JsonObject parse(String JsonString) {
 		
 		this.JsonString = JsonString;
@@ -32,7 +28,13 @@ public class Parser {
 			
 		}
 		
-		return this.JsonObject.setName(this.name);
+		if(this.JsonObject == null) {
+			
+			return new JsonObject();
+			
+		}
+		
+		return this.JsonObject;
 		
 	}
 	
@@ -40,7 +42,15 @@ public class Parser {
 		
 		this.JsonObject = JsonObject;
 		
-		return getObject(JsonObject);
+		String returnString = getObject(JsonObject);
+		
+		if(returnString == null) {
+			
+			return "{}";
+			
+		}
+		
+		return returnString;
 		
 	}
 	
@@ -334,15 +344,15 @@ public class Parser {
 				
 			}
 			
-			if(JsonObject.get(key) instanceof String) {
+			if(JsonObject.getObject(key) instanceof String) {
 				
-				main = main + "\"" + key + "\":\"" + String.valueOf(JsonObject.get(key)) + "\"";
+				main = main + "\"" + key + "\":\"" + String.valueOf(JsonObject.getObject(key)) + "\"";
 				
 				continue;
 				
 			}
 			
-			if(JsonObject.get(key) instanceof Integer) {
+			if(JsonObject.getObject(key) instanceof Integer) {
 				
 				main = main + "\"" + key + "\":" + (Integer) JsonObject.get(key);
 				
@@ -350,7 +360,7 @@ public class Parser {
 				
 			}
 			
-			if(JsonObject.get(key) instanceof Boolean) {
+			if(JsonObject.getObject(key) instanceof Boolean) {
 				
 				main = main + "\"" + key + "\":" + (Boolean) JsonObject.get(key);
 				
@@ -358,13 +368,13 @@ public class Parser {
 				
 			}
 			
-			if(JsonObject.get(key) instanceof JsonObject) {
+			if(JsonObject.getObject(key) instanceof JsonObject) {
 				
 				main = main + "\"" + key + "\":" + getObject(JsonObject.getJsonObject(key));
 				
 			}
 			
-			if(JsonObject.get(key) instanceof JsonArray) {
+			if(JsonObject.getObject(key) instanceof JsonArray) {
 				
 				main = main + "\"" + key + "\":" + getArray(JsonObject.getArray(key));
 				

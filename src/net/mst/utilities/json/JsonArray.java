@@ -3,7 +3,7 @@ package net.mst.utilities.json;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JsonArray {
+public class JsonArray extends JsonRoot {
 	
 	private List<Object> data;
 	

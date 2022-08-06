@@ -22,11 +22,11 @@ public class Editor {
 		
 		for(String string : Strings) {
 			
-			connectedString += string + Connector;
+			connectedString += Connector + string;
 			
 		}
 		
-		return connectedString;
+		return connectedString.substring(1);
 		
 	}
 	
@@ -59,6 +59,33 @@ public class Editor {
 		}
 		
 		return raw;
+		
+	}
+	
+	public String replace(char ReplacedCharacter, String NewString) {
+		
+		String newString = "";
+		
+		int count = 0;
+		for(int i = 0; i < raw.length(); i++) {
+			
+			if(ReplacedCharacter == raw.charAt(i)) {
+				
+				if(count >= NewString.length()) {
+					newString += NewString.charAt(NewString.length() - 1);
+				}else {
+					newString += NewString.charAt(count);
+				}
+				count++;
+				
+			}else {
+				newString += raw.charAt(i);
+			}
+			
+		}
+		
+		raw = newString;
+		return newString;
 		
 	}
 	
@@ -112,6 +139,47 @@ public class Editor {
 		}
 		
 		return this.raw;
+		
+	}
+	
+	public static String skip(String Raw, Character Character) {
+		
+		for(int i = 0; i < Raw.length(); i++) {
+			
+			if(Raw.charAt(i) != Character) {
+				return Raw.substring(i);
+			}
+			
+		}
+		
+		return Raw;
+		
+	}
+	
+	public static String[] unifyLength(Character Filler, String... Strings) {
+		
+		if(Strings.length <= 1) {
+			return new String[0];
+		}
+		
+		int length = Strings[0].length();
+		String[] array = new String[Strings.length];
+		
+		for(int i = 1; i < Strings.length; i++) {
+			
+			if(Strings[i].length() > length) {
+				length = Strings[i].length();
+			}
+			
+		}
+		
+		for(int i = 0; i < Strings.length; i++) {
+			
+			array[i] = Editor.edit(Strings[i]).setLength(-length, Filler);
+			
+		}
+		
+		return array;
 		
 	}
 

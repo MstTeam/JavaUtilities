@@ -138,13 +138,15 @@ class TimerThread extends Thread {
 					
 					if(tempInterval > 0) {
 						
-						waitTime(tempInterval - (System.currentTimeMillis() - start));
+						//waitTime(tempInterval - (System.currentTimeMillis() - start));
+						waitTime(tempInterval);
 						
 					}
 					
 				}else {
 					
-					waitTime(interval - (System.currentTimeMillis() - start));
+					//waitTime(interval - (System.currentTimeMillis() - start));
+					waitTime(interval);
 					
 				}
 				

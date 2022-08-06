@@ -1,164 +1,27 @@
 package net.mst.utilities.json;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.Scanner;
 import java.util.Set;
 
-public class JsonObject {
+public class JsonObject extends JsonRoot {
 	
-	private File sourceFile = null;
-	private String name = "jsonFile";
-
-	private HashMap<String, Object> data;
+	private HashMap<String, Object> jsonData = new HashMap<String, Object>();
 	
 	public JsonObject() {
 		
-		data = new HashMap<String, Object>();
 		
-	}
-	
-	public JsonObject(String Name) {
-		
-		data = new HashMap<String, Object>();
-		this.name = Name;
-		
-	}
-	
-	private JsonObject(File file) {
-		
-		this.sourceFile = file;
-		
-	}
-	
-	public static JsonObject ofPath(File Path) {
-		
-		if(!Path.exists()) {
-			
-			Path.getParentFile().mkdirs();
-			JsonObject object = new JsonObject(Path);
-			
-			if(Path.isDirectory()) {
-				Path.mkdirs();
-			}
-			
-			if(Path.isFile()) {
-				try {
-					Path.createNewFile();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				object.save(Path);
-			}
-		
-			return object;
-			
-		}else {
-			
-			if(Path.isFile()) {
-				
-				String jsonString = "";
-				
-				Scanner fileScanner = null;
-				try {
-					fileScanner = new Scanner(Path);
-				} catch (FileNotFoundException e) {}
-				
-				while(fileScanner.hasNextLine()) {
-					
-					jsonString += fileScanner.nextLine();
-					
-				}
-				
-				return new Parser().parse(jsonString).setSource(Path);
-				
-			}
-			
-			return null;
-			
-		}
-		
-	}
-	
-	public void save() {
-		
-		if(this.sourceFile != null) {
-			
-			save(this.sourceFile);
-			
-		}
-		
-	}
-	
-	public void save(File File) {
-		
-		File jsonFile = File;
-		
-		if(jsonFile.isDirectory()) {
-			
-			for(int i = 0; i >= 0; i++) {
-				String fileName = this.name;
-				
-				if(i > 0) {
-					fileName = fileName + i;
-				}
-				
-				File newFile = new File(jsonFile + "/" + fileName + ".json");
-				
-				if(!newFile.exists()) {
-					jsonFile = newFile;
-					newFile.getParentFile().mkdirs();
-					try {
-						newFile.createNewFile();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					break;
-				}
-				
-			}
-			
-		}
-			
-		try {
-			FileWriter fw = new FileWriter(jsonFile, false);
-				
-			fw.write(new Parser().parse(this));
-			fw.flush();
-			fw.close();
-				
-		} catch (IOException e) {}
 		
 	}
 	
 	public HashMap<String, Object> getHash() {
 		
-		return this.data;
-		
-	}
-	
-	public JsonObject setName(String Name) {
-		
-		this.name = Name;
-		return this;
-		
-	}
-	
-	public JsonObject setSource(File File) {
-		
-		this.sourceFile = File;
-		return this;
+		return this.jsonData;
 		
 	}
 	
 	public JsonObject setValue(String Key, Object Value) {
 			
-		data.put(Key, Value);
+		jsonData.put(Key, Value);
 		
 		return this;
 		
@@ -166,9 +29,9 @@ public class JsonObject {
 	
 	public JsonObject removeValue(String Key) {
 		
-		if(data.containsKey(Key)) {
+		if(jsonData.containsKey(Key)) {
 			
-			data.remove(Key);
+			jsonData.remove(Key);
 			
 		}
 		
@@ -178,7 +41,7 @@ public class JsonObject {
 	
 	public Boolean containsKey(String Key) {
 		
-		if(data.containsKey(Key)) {
+		if(jsonData.containsKey(Key)) {
 			
 			return true;
 			
@@ -190,13 +53,13 @@ public class JsonObject {
 	
 	public Set<String> getKeys() {
 		
-		return data.keySet();
+		return jsonData.keySet();
 		
 	}
 	
 	public boolean isEmpty() {
 		
-		if(data.isEmpty()) {
+		if(jsonData.isEmpty()) {
 			
 			return true;
 			
@@ -209,9 +72,9 @@ public class JsonObject {
 	@SuppressWarnings("unchecked")
 	public <T> T get(String Key) {
 		
-		if(data.containsKey(Key)) {
+		if(jsonData.containsKey(Key)) {
 			
-			return (T) data.get(Key);
+			return (T) jsonData.get(Key);
 			
 		}
 		
@@ -221,9 +84,9 @@ public class JsonObject {
 	
 	public Object getObject(String Key) {
 		
-		if(data.containsKey(Key)) {
+		if(jsonData.containsKey(Key)) {
 			
-			return data.get(Key);
+			return jsonData.get(Key);
 			
 		}
 		
@@ -233,9 +96,9 @@ public class JsonObject {
 	
 	public String getString(String Key) {
 		
-		if(data.containsKey(Key)) {
+		if(jsonData.containsKey(Key)) {
 			
-			return String.valueOf(data.get(Key));
+			return String.valueOf(jsonData.get(Key));
 			
 		}
 		
@@ -245,9 +108,9 @@ public class JsonObject {
 	
 	public Integer getInteger(String Key) {
 		
-		if(data.containsKey(Key)) {
+		if(jsonData.containsKey(Key)) {
 			
-			return (Integer) data.get(Key);
+			return (Integer) jsonData.get(Key);
 			
 		}
 		
@@ -257,9 +120,9 @@ public class JsonObject {
 	
 	public Long getLong(String Key) {
 		
-		if(data.containsKey(Key)) {
+		if(jsonData.containsKey(Key)) {
 			
-			return (Long) data.get(Key);
+			return (Long) jsonData.get(Key);
 			
 		}
 		
@@ -269,9 +132,9 @@ public class JsonObject {
 	
 	public Boolean getBoolean(String Key) {
 		
-		if(data.containsKey(Key)) {
+		if(jsonData.containsKey(Key)) {
 			
-			return (Boolean) data.get(Key);
+			return (Boolean) jsonData.get(Key);
 			
 		}
 		
@@ -281,9 +144,9 @@ public class JsonObject {
 	
 	public JsonObject getJsonObject(String Key) {
 		
-		if(data.containsKey(Key)) {
+		if(jsonData.containsKey(Key)) {
 			
-			return (JsonObject) data.get(Key);
+			return (JsonObject) jsonData.get(Key);
 			
 		}
 		
@@ -293,9 +156,9 @@ public class JsonObject {
 
 	public JsonArray getArray(String Key) {
 	
-		if(data.containsKey(Key)) {
+		if(jsonData.containsKey(Key)) {
 		
-			return (JsonArray) data.get(Key);
+			return (JsonArray) jsonData.get(Key);
 		
 		}
 	
@@ -309,12 +172,12 @@ public class JsonObject {
 			
 			JsonObject.getKeys().forEach(key -> {
 				
-				this.data.put(key, JsonObject.get(key));
+				this.jsonData.put(key, JsonObject.get(key));
 				
 			});
 			
 		}
 		
 	}
-	
+
 }
